@@ -1,0 +1,785 @@
+; "EFECT2.ASM" 1989/10/10 R.H
+;              PC-9801UV11 make by R.H 1989
+; public subroutine.
+;
+;
+;	SSEFC0			; visual data segment plean 0
+;	SSEFC1			; visual data segment plean 1
+;	SSEFC2			; visual data segment plean 2
+;	SSEFC3			; visual data segment plean 3
+;
+;	VX1:WORD		; source point x1.
+;	VY1:WORD		; source point y1.
+;	VX2:WORD		; destination point x3.
+;	VY2:WORD		; destination point y3.
+;
+;
+;［削除］ＥＦＥＣＴ０：ＥＣＴＯＰ０はワークに使うので６４２バイトないと
+;［削除］困ります
+;
+
+CODE	SEGMENT	PUBLIC	'CODE'
+	ASSUME	CS:CODE,DS:DATA
+
+	PUBLIC	BOXPAL		; ＢＯＸペイント
+	PUBLIC	BOXMSS		; ＢＯＸメッシュ
+	PUBLIC	BOXNOT		; ＢＯＸ反転
+	PUBLIC	BOXPAI		; ＢＯＸ１プレーンペイント
+	PUBLIC	BOXBLK		; ＢＯＸ１プレーンヌキ
+	PUBLIC	BOXMSU		; ＢＯＸ１プレーンメッシュ
+	PUBLIC	BOXNTS		; ＢＯＸ１プレーン反転
+;*NON*;	PUBLIC	CLRCHG		; カラーチェンジ
+
+
+;	ＢＯＸペイント
+;	-i- SSEFC0-3 : efect data segment.
+;	    VX1,VY1  : start point.
+;	    VX2,VY2  : end point.
+;	    CX       : color palet number.
+
+BOXPAL	PROC	NEAR
+	TEST	CX,1
+	JZ	BOXPAL1
+	MOV	DX,SSEFC0	; visual data segment plean 0
+	CALL	BOXPAI		; ＢＯＸプレーンペイント
+	JMP	BOXPAL11
+BOXPAL1:
+	MOV	DX,SSEFC0	; visual data segment plean 0
+	CALL	BOXBLK		; ＢＯＸ１プレーンヌキ
+BOXPAL11:
+	TEST	CX,2
+	JZ	BOXPAL2
+	MOV	DX,SSEFC1	; visual data segment plean 1
+	CALL	BOXPAI		; ＢＯＸプレーンペイント
+	JMP	BOXPAL22
+BOXPAL2:
+	MOV	DX,SSEFC1	; visual data segment plean 1
+	CALL	BOXBLK		; ＢＯＸ１プレーンヌキ
+BOXPAL22:
+	TEST	CX,4
+	JZ	BOXPAL3
+	MOV	DX,SSEFC2	; visual data segment plean 2
+	CALL	BOXPAI		; ＢＯＸプレーンペイント
+	JMP	BOXPAL33
+BOXPAL3:
+	MOV	DX,SSEFC2	; visual data segment plean 2
+	CALL	BOXBLK		; ＢＯＸ１プレーンヌキ
+BOXPAL33:
+	TEST	CX,8
+	JZ	BOXPAL4
+	MOV	DX,SSEFC3	; visual data segment plean 3
+	CALL	BOXPAI		; ＢＯＸプレーンペイント
+	JMP	BOXPAL44
+BOXPAL4:
+	MOV	DX,SSEFC3	; visual data segment plean 3
+	CALL	BOXBLK		; ＢＯＸ１プレーンヌキ
+BOXPAL44:
+	RET
+BOXPAL	ENDP
+
+
+;	ＢＯＸメッシュ
+;	-i- SSEFC0-3 : efect data segment.
+;	    VX1,VY1  : start point.
+;	    VX2,VY2  : end point.
+;	    CX       : color palet number.
+
+BOXMSS	PROC	NEAR
+	MOV	BP,0		; 0=AND
+	TEST	CX,1		;
+	JZ	BOXMSS1		;
+	MOV	BP,1		; 1=OR
+BOXMSS1:			;
+	MOV	DX,SSEFC0	; visual data segment plean 0
+	CALL	BOXMSU		; ＢＯＸ１プレーンメッシュ
+
+	MOV	BP,0		; 0=AND
+	TEST	CX,2		;
+	JZ	BOXMSS2		;
+	MOV	BP,1		; 1=OR
+BOXMSS2:			;
+	MOV	DX,SSEFC1	; visual data segment plean 1
+	CALL	BOXMSU		; ＢＯＸ１プレーンメッシュ
+
+	MOV	BP,0		; 0=AND
+	TEST	CX,4		;
+	JZ	BOXMSS3		;
+	MOV	BP,1		; 1=OR
+BOXMSS3:			;
+	MOV	DX,SSEFC2	; visual data segment plean 2
+	CALL	BOXMSU		; ＢＯＸ１プレーンメッシュ
+
+	MOV	BP,0		; 0=AND
+	TEST	CX,8		;
+	JZ	BOXMSS4		;
+	MOV	BP,1		; 1=OR
+BOXMSS4:			;
+	MOV	DX,SSEFC3	; visual data segment plean 3
+	CALL	BOXMSU		; ＢＯＸ１プレーンメッシュ
+
+	RET
+BOXMSS	ENDP
+
+
+
+;	ＢＯＸ反転
+;	-i- SSEFC0-3 : efect data segment.
+;	    VX1,VY1  : start point.
+;	    VX2,VY2  : end point.
+;	    CX       : color palet number.
+
+BOXNOT	PROC	NEAR
+	TEST	CX,1
+	JZ	BOXNOT1
+	MOV	DX,SSEFC0	; visual data segment plean 0
+	CALL	BOXNTS		; ＢＯＸ１プレーン反転
+;*NON*;	JMP	BOXNOT11
+BOXNOT1:
+BOXNOT11:
+	TEST	CX,2
+	JZ	BOXNOT2
+	MOV	DX,SSEFC1	; visual data segment plean 1
+	CALL	BOXNTS		; ＢＯＸ１プレーン反転
+;*NON*;	JMP	BOXNOT22
+BOXNOT2:
+BOXNOT22:
+	TEST	CX,4
+	JZ	BOXNOT3
+	MOV	DX,SSEFC2	; visual data segment plean 2
+	CALL	BOXNTS		; ＢＯＸ１プレーン反転
+;*NON*;	JMP	BOXNOT33
+BOXNOT3:
+BOXNOT33:
+	TEST	CX,8
+	JZ	BOXNOT4
+	MOV	DX,SSEFC3	; visual data segment plean 3
+	CALL	BOXNTS		; ＢＯＸ１プレーン反転
+;*NON*;	JMP	BOXNOT44
+BOXNOT4:
+BOXNOT44:
+	RET
+BOXNOT	ENDP
+
+
+
+;	ＢＯＸ１プレーンメッシュ
+;	-i- VX1,VY1 : start point.
+;	    VX2,VY2 : end point.
+;	    DX      : SEGMENT
+;	    BP      : 0=AND,1=OR
+
+BOXMSU	PROC	NEAR
+	PUSH	DX
+	PUSH	BP
+	PUSH	CX
+
+	MOV	ES,DX
+
+	MOV	DI,VY1			;
+	SHL	DI,1			;
+	SHL	DI,1			;
+	SHL	DI,1			;
+	SHL	DI,1			;
+	MOV	AX,DI			;
+	SHL	DI,1			;
+	SHL	DI,1			;
+	ADD	DI,AX			; di = Vy1 * 80
+
+	ADD	DI,VX1			; di = di + Vx1
+	MOV	DX,DI			; dx = di
+
+	MOV	CX,VY2			;
+	SUB	CX,VY1			;
+	INC	CX			; cx = Vy2 - Vy1 + 1
+
+	MOV	BX,VX2			;
+	SUB	BX,VX1			;
+	INC	BX			; bx  = Vx2 - Vx1 + 1
+
+	CMP	BP,1			; 0=AND,1=OR
+	JE	BOXMSU_OR		;
+
+BOXMSU_AND:
+	MOV	AL,10101010B		; bit pattan.
+	MOV	SI,CX			; loop counter.
+BOXMSU1:
+	MOV	DI,DX
+	MOV	CX,BX
+	ROR	AL,1
+BOXMSU2:AND	ES:[DI],AL
+	INC	DI
+	LOOP	BOXMSU2
+
+	ADD	DX,80
+	DEC	SI
+	JNZ	BOXMSU1
+
+	JMP	BOXMSU9
+
+BOXMSU_OR:
+	MOV	AL,10101010B		; bit pattan.
+	MOV	SI,CX			; loop counter.
+BOXMSU3:
+	MOV	DI,DX
+	MOV	CX,BX
+BOXMSU4:OR	ES:[DI],AL
+	INC	DI
+	LOOP	BOXMSU4
+
+	ROR	AL,1
+	ADD	DX,80
+	DEC	SI
+	JNZ	BOXMSU3
+
+BOXMSU9:
+	POP	CX
+	POP	BP
+	POP	DX
+	RET
+BOXMSU	ENDP
+
+
+
+;	ＢＯＸ１プレーンペイント
+;	-i- VX1,VY1 : start point.
+;	    VX2,VY2 : end point.
+;	    DX      : SEGMENT
+
+BOXPAI	PROC	NEAR
+	PUSH	DX
+	PUSH	BP
+	PUSH	CX
+
+	MOV	ES,DX
+
+	MOV	DI,VY1			;
+	SHL	DI,1			;
+	SHL	DI,1			;
+	SHL	DI,1			;
+	SHL	DI,1			;
+	MOV	AX,DI			;
+	SHL	DI,1			;
+	SHL	DI,1			;
+	ADD	DI,AX			; di = Vy1 * 80
+
+	ADD	DI,VX1			; di = di + Vx1
+	MOV	DX,DI			; dx = di
+
+	MOV	CX,VY2			;
+	SUB	CX,VY1			;
+	INC	CX			; cx = Vy2 - Vy1 + 1
+
+	MOV	BX,VX2			;
+	SUB	BX,VX1			;
+	INC	BX			; bx  = Vx2 - Vx1 + 1
+
+	MOV	SI,CX			; si : loop counter.
+	MOV	AL,0FFH			; pattan.
+BOXPAI1:
+	MOV	DI,DX	; start point.
+	MOV	CX,BX	; x length.
+	REP	STOSB	;
+
+	ADD	DX,80
+	DEC	SI			; loop counter.
+	JNZ	BOXPAI1
+
+	POP	CX
+	POP	BP
+	POP	DX
+	RET
+BOXPAI	ENDP
+
+
+
+;	ＢＯＸ１プレーンヌキ
+;	-i- VX1,VY1 : start point.
+;	    VX2,VY2 : end point.
+;	    DX      : SEGMENT
+
+BOXBLK	PROC	NEAR
+	PUSH	DX
+	PUSH	BP
+	PUSH	CX
+
+	MOV	ES,DX
+
+	MOV	DI,VY1			;
+	SHL	DI,1			;
+	SHL	DI,1			;
+	SHL	DI,1			;
+	SHL	DI,1			;
+	MOV	AX,DI			;
+	SHL	DI,1			;
+	SHL	DI,1			;
+	ADD	DI,AX			; di = Vy1 * 80
+
+	ADD	DI,VX1			; di = di + Vx1
+	MOV	DX,DI			; dx = di
+
+	MOV	CX,VY2			;
+	SUB	CX,VY1			;
+	INC	CX			; cx = Vy2 - Vy1 + 1
+
+	MOV	BX,VX2			;
+	SUB	BX,VX1			;
+	INC	BX			; bx  = Vx2 - Vx1 + 1
+
+	MOV	SI,CX			; si : loop counter.
+	MOV	AL,0			; pattan.
+BOXBLK1:
+	MOV	DI,DX	; start point.
+	MOV	CX,BX	; x length.
+	REP	STOSB	;
+
+	ADD	DX,80
+	DEC	SI			; loop counter.
+	JNZ	BOXBLK1
+
+	POP	CX
+	POP	BP
+	POP	DX
+	RET
+BOXBLK	ENDP
+
+
+
+;	ＢＯＸ１プレーン反転
+;	-i- VX1,VY1 : start point.
+;	    VX2,VY2 : end point.
+;	    DX      : SEGMENT
+
+BOXNTS	PROC	NEAR
+	PUSH	DX
+	PUSH	CX
+	MOV	ES,DX
+
+	MOV	DI,VY1			;
+	SHL	DI,1			;
+	SHL	DI,1			;
+	SHL	DI,1			;
+	SHL	DI,1			;
+	MOV	AX,DI			;
+	SHL	DI,1			;
+	SHL	DI,1			;
+	ADD	DI,AX			; di = Vy1 * 80
+
+	ADD	DI,VX1			; di = di + Vx1
+	MOV	DX,DI			; dx = di
+
+	MOV	CX,VY2			;
+	SUB	CX,VY1			;
+	INC	CX			; cx = Vy2 - Vy1 + 1
+
+	MOV	BX,VX2			;
+	SUB	BX,VX1			;
+	INC	BX			; bx  = Vx2 - Vx1 + 1
+
+	MOV	SI,CX			; si : loop counter.
+BOXNTS1:
+	MOV	DI,DX
+	MOV	CX,BX
+BOXNTS2:NOT	BYTE PTR ES:[DI]
+	INC	DI
+	LOOP	BOXNTS2
+
+	ADD	DX,80
+	DEC	SI
+	JNZ	BOXNTS1
+
+BOXNTS9:
+	POP	CX
+	POP	DX
+	RET
+BOXNTS	ENDP
+
+
+;*NON*;
+;*NON*;;	カラーチェンジ
+;*NON*;;	-i-
+;*NON*;;	VX1,VY1 : 開始座標
+;*NON*;;	VX2,VY2 : 終了座標
+;*NON*;;	CLRSOU	; 変更カラーパレット
+;*NON*;;	CLRDES	; 変更後カラーパレット
+;*NON*;CLRCHG	PROC	NEAR
+;*NON*;	PUSH	AX
+;*NON*;	PUSH	BX
+;*NON*;	PUSH	CX
+;*NON*;	PUSH	DX
+;*NON*;	PUSH	BP
+;*NON*;	PUSH	ES
+;*NON*;	PUSH	DI
+;*NON*;	PUSH	DS
+;*NON*;	PUSH	SI
+;*NON*;
+;*NON*;	MOV	AX,SEG EFECT0	; ｴﾌｪｸﾄﾊﾞｯﾌｧセグメント
+;*NON*;	MOV	ES,AX		;
+;*NON*;	MOV	DI,OFFSET ECTOP0; ｴﾌｪｸﾄﾊﾞｯﾌｧオフセット
+;*NON*;	MOV	CX,640/2	;
+;*NON*;	MOV	AX,0		;
+;*NON*;	REP	STOSW		;
+;*NON*;
+;*NON*;	MOV	DI,OFFSET ECTOP0	; ｴﾌｪｸﾄﾊﾞｯﾌｧオフセット
+;*NON*;	MOV	AL,BYTE PTR CLRSOU	; 変更カラーパレット
+;*NON*;	MOV	ES:[DI][640],AL		;
+;*NON*;	MOV	AL,BYTE PTR CLRDES	; 変更後カラーパレット
+;*NON*;	MOV	ES:[DI][641],AL		;
+;*NON*;
+;*NON*;
+;*NON*;	MOV	DX,VY1		;
+;*NON*;	SHL	DX,1		;
+;*NON*;	SHL	DX,1		;  point address.
+;*NON*;	SHL	DX,1		;
+;*NON*;	SHL	DX,1		;  DX = VY1 * 80 + VX1
+;*NON*;	MOV	AX,DX		;
+;*NON*;	SHL	DX,1		;
+;*NON*;	SHL	DX,1		;
+;*NON*;	ADD	DX,AX		;
+;*NON*;	ADD	DX,VX2		;
+;*NON*;	MOV	CX,DX		; Ｘエンド=CX
+;*NON*;
+;*NON*;	MOV	DX,VY2		;
+;*NON*;	SHL	DX,1		;
+;*NON*;	SHL	DX,1		;  point address.
+;*NON*;	SHL	DX,1		;
+;*NON*;	SHL	DX,1		;  DX = VY2 * 80 + VX2
+;*NON*;	MOV	AX,DX		;
+;*NON*;	SHL	DX,1		;
+;*NON*;	SHL	DX,1		;
+;*NON*;	ADD	DX,AX		;
+;*NON*;	ADD	DX,VX2		;
+;*NON*;	MOV	BP,DX		; Ｙエンド=BP
+;*NON*;
+;*NON*;	MOV	DX,VY1		;
+;*NON*;	SHL	DX,1		;
+;*NON*;	SHL	DX,1		;  point address.
+;*NON*;	SHL	DX,1		;
+;*NON*;	SHL	DX,1		;  DX = VRY * 80 + VRX
+;*NON*;	MOV	AX,DX		;
+;*NON*;	SHL	DX,1		;
+;*NON*;	SHL	DX,1		;
+;*NON*;	ADD	DX,AX		;
+;*NON*;	ADD	DX,VX1		;
+;*NON*;	MOV	SI,DX		; VRAM address pointer.=SI=DX
+;*NON*;
+;*NON*;	;	Ｘエンド=CX
+;*NON*;	;	Ｙエンド=BP
+;*NON*;	;	VRAM address pointer.=SI=DX
+;*NON*;	;	ｴﾌｪｸﾄﾊﾞｯﾌｧセグメント=ES
+;*NON*;	;	ｴﾌｪｸﾄﾊﾞｯﾌｧオフセット=DI
+;*NON*;CLRCHG_LOOP_START:
+;*NON*;	MOV	AX,SEG EFECT0	; ｴﾌｪｸﾄﾊﾞｯﾌｧセグメント
+;*NON*;	MOV	ES,AX		;
+;*NON*;	MOV	DI,OFFSET ECTOP0; ｴﾌｪｸﾄﾊﾞｯﾌｧオフセット=DI
+;*NON*;
+;*NON*;	PUSH	DX
+;*NON*;CLRCHG_LOOP:
+;*NON*;	MOV	AX,VRAM_SEG_G0
+;*NON*;	MOV	DS,AX
+;*NON*;	MOV	DL,DS:[SI]
+;*NON*;
+;*NON*;	MOV	AX,VRAM_SEG_G1
+;*NON*;	MOV	DS,AX
+;*NON*;	MOV	DH,DS:[SI]
+;*NON*;
+;*NON*;	MOV	AX,VRAM_SEG_G2
+;*NON*;	MOV	DS,AX
+;*NON*;	MOV	BL,DS:[SI]
+;*NON*;
+;*NON*;	MOV	AX,VRAM_SEG_G3
+;*NON*;	MOV	DS,AX
+;*NON*;	MOV	BH,DS:[SI]
+;*NON*;	;			ＶＲＡＭ１バイトは８ドットというわけ
+;*NON*;	MOV	AL,0
+;*NON*;	SHL	BH,1		; ＢＨの左端１ビットキャリーへ(VRAM3)
+;*NON*;	RCL	AL,1		;	キャリーをＤＬの右端へセット
+;*NON*;	SHL	BL,1		; ＢＬの左端１ビットキャリーへ(VRAM2)
+;*NON*;	RCL	AL,1		;
+;*NON*;	SHL	DH,1		; ＤＨの左端１ビットキャリーへ(VRAM1)
+;*NON*;	RCL	AL,1		;
+;*NON*;	SHL	DL,1		; ＤＬの左端１ビットキャリーへ(VRAM0)
+;*NON*;	RCL	AL,1		;
+;*NON*;	STOSB			; ＡＬをバッファへセット（１ドットの値）;*NON*;;;*NON*;	MOV	AL,0
+;*NON*;	SHL	BH,1		; ＢＨの左端１ビットキャリーへ(VRAM3)
+;*NON*;	RCL	AL,1		;	キャリーをＤＬの右端へセット
+;*NON*;	SHL	BL,1		; ＢＬの左端１ビットキャリーへ(VRAM2)
+;*NON*;	RCL	AL,1		;
+;*NON*;	SHL	DH,1		; ＤＨの左端１ビットキャリーへ(VRAM1)
+;*NON*;	RCL	AL,1		;
+;*NON*;	SHL	DL,1		; ＤＬの左端１ビットキャリーへ(VRAM0)
+;*NON*;	RCL	AL,1		;
+;*NON*;	STOSB			; ＡＬをバッファへセット（１ドットの値）;*NON*;;;*NON*;	MOV	AL,0
+;*NON*;	SHL	BH,1		; ＢＨの左端１ビットキャリーへ(VRAM3)
+;*NON*;	RCL	AL,1		;	キャリーをＤＬの右端へセット
+;*NON*;	SHL	BL,1		; ＢＬの左端１ビットキャリーへ(VRAM2)
+;*NON*;	RCL	AL,1		;
+;*NON*;	SHL	DH,1		; ＤＨの左端１ビットキャリーへ(VRAM1)
+;*NON*;	RCL	AL,1		;
+;*NON*;	SHL	DL,1		; ＤＬの左端１ビットキャリーへ(VRAM0)
+;*NON*;	RCL	AL,1		;
+;*NON*;	STOSB			; ＡＬをバッファへセット（１ドットの値）
+;*NON*;	MOV	AL,0
+;*NON*;	SHL	BH,1		; ＢＨの左端１ビットキャリーへ(VRAM3)
+;*NON*;	RCL	AL,1		;	キャリーをＤＬの右端へセット
+;*NON*;	SHL	BL,1		; ＢＬの左端１ビットキャリーへ(VRAM2)
+;*NON*;	RCL	AL,1		;
+;*NON*;	SHL	DH,1		; ＤＨの左端１ビットキャリーへ(VRAM1)
+;*NON*;	RCL	AL,1		;
+;*NON*;	SHL	DL,1		; ＤＬの左端１ビットキャリーへ(VRAM0)
+;*NON*;	RCL	AL,1		;
+;*NON*;	STOSB			; ＡＬをバッファへセット（１ドットの値）
+;*NON*;	MOV	AL,0
+;*NON*;	SHL	BH,1		; ＢＨの左端１ビットキャリーへ(VRAM3)
+;*NON*;	RCL	AL,1		;	キャリーをＤＬの右端へセット
+;*NON*;	SHL	BL,1		; ＢＬの左端１ビットキャリーへ(VRAM2)
+;*NON*;	RCL	AL,1		;
+;*NON*;	SHL	DH,1		; ＤＨの左端１ビットキャリーへ(VRAM1)
+;*NON*;	RCL	AL,1		;
+;*NON*;	SHL	DL,1		; ＤＬの左端１ビットキャリーへ(VRAM0)
+;*NON*;	RCL	AL,1		;
+;*NON*;	STOSB			; ＡＬをバッファへセット（１ドットの値）
+;*NON*;	MOV	AL,0
+;*NON*;	SHL	BH,1		; ＢＨの左端１ビットキャリーへ(VRAM3)
+;*NON*;	RCL	AL,1		;	キャリーをＤＬの右端へセット
+;*NON*;	SHL	BL,1		; ＢＬの左端１ビットキャリーへ(VRAM2)
+;*NON*;	RCL	AL,1		;
+;*NON*;	SHL	DH,1		; ＤＨの左端１ビットキャリーへ(VRAM1)
+;*NON*;	RCL	AL,1		;
+;*NON*;	SHL	DL,1		; ＤＬの左端１ビットキャリーへ(VRAM0)
+;*NON*;	RCL	AL,1		;
+;*NON*;	STOSB			; ＡＬをバッファへセット（１ドットの値）
+;*NON*;	MOV	AL,0
+;*NON*;	SHL	BH,1		; ＢＨの左端１ビットキャリーへ(VRAM3)
+;*NON*;	RCL	AL,1		;	キャリーをＤＬの右端へセット
+;*NON*;	SHL	BL,1		; ＢＬの左端１ビットキャリーへ(VRAM2)
+;*NON*;	RCL	AL,1		;
+;*NON*;	SHL	DH,1		; ＤＨの左端１ビットキャリーへ(VRAM1)
+;*NON*;	RCL	AL,1		;
+;*NON*;	SHL	DL,1		; ＤＬの左端１ビットキャリーへ(VRAM0)
+;*NON*;	RCL	AL,1		;
+;*NON*;	STOSB			; ＡＬをバッファへセット（１ドットの値）
+;*NON*;	MOV	AL,0
+;*NON*;	SHL	BH,1		; ＢＨの左端１ビットキャリーへ(VRAM3)
+;*NON*;	RCL	AL,1		;	キャリーをＤＬの右端へセット
+;*NON*;	SHL	BL,1		; ＢＬの左端１ビットキャリーへ(VRAM2)
+;*NON*;	RCL	AL,1		;
+;*NON*;	SHL	DH,1		; ＤＨの左端１ビットキャリーへ(VRAM1)
+;*NON*;	RCL	AL,1		;
+;*NON*;	SHL	DL,1		; ＤＬの左端１ビットキャリーへ(VRAM0)
+;*NON*;	RCL	AL,1		;
+;*NON*;	STOSB			; ＡＬをバッファへセット（１ドットの値）
+;*NON*;
+;*NON*;	INC	SI		; ＶＲＡＭアドレスは１バイトずらす
+;*NON*;	CMP	SI,CX		; Ｘエンド=CX
+;*NON*;	JNBE	CLRCHG_NEXT	; if SI > CX then NEXT １ライン取ったら処理
+;*NON*;	JMP	CLRCHG_LOOP	;
+;*NON*;CLRCHG_NEXT:			;
+;*NON*;	POP	DX		; ＤＸはＶＲＡＭアドレス
+;*NON*;
+;*NON*;	MOV	SI,DX		; VRAM address pointer.=SI=DX
+;*NON*;	MOV	DI,OFFSET ECTOP0; ｴﾌｪｸﾄﾊﾞｯﾌｧオフセット=DI
+;*NON*;
+;*NON*;	CALL	CHANGE_COLOR	; １ラインカラーチェンジ
+;*NON*;
+;*NON*;	MOV	DI,OFFSET ECTOP0; ｴﾌｪｸﾄﾊﾞｯﾌｧオフセット=DI
+;*NON*;
+;*NON*;	PUSH	DX
+;*NON*;	MOV	AX,ES		;
+;*NON*;	MOV	DS,AX		; ＤＳをバッファセグメントにする
+;*NON*;	XCHG	DI,SI		; ＤＳ：ＳＩはバッファのフルポインタ
+;*NON*;CLRCHG_LOOP2:
+;*NON*;
+;*NON*;	LODSB			; ドットの値をＡＬへ取り出す
+;*NON*;	SHR	AL,1		;	ＡＬの右端１ビットをキャリーへ
+;*NON*;	RCL	DL,1		; キャリーをＤＬの右端１ビットへ(VRAM0)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	DH,1		; キャリーをＤＨの右端１ビットへ(VRAM1)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	BL,1		; キャリーをＢＬの右端１ビットへ(VRAM2)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	BH,1		; キャリーをＢＨの右端１ビットへ(VRAM3)
+;*NON*;
+;*NON*;	LODSB			; ドットの値をＡＬへ取り出す
+;*NON*;	SHR	AL,1		;	ＡＬの右端１ビットをキャリーへ
+;*NON*;	RCL	DL,1		; キャリーをＤＬの右端１ビットへ(VRAM0)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	DH,1		; キャリーをＤＨの右端１ビットへ(VRAM1)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	BL,1		; キャリーをＢＬの右端１ビットへ(VRAM2)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	BH,1		; キャリーをＢＨの右端１ビットへ(VRAM3)
+;*NON*;
+;*NON*;	LODSB			; ドットの値をＡＬへ取り出す
+;*NON*;	SHR	AL,1		;	ＡＬの右端１ビットをキャリーへ
+;*NON*;	RCL	DL,1		; キャリーをＤＬの右端１ビットへ(VRAM0)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	DH,1		; キャリーをＤＨの右端１ビットへ(VRAM1)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	BL,1		; キャリーをＢＬの右端１ビットへ(VRAM2)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	BH,1		; キャリーをＢＨの右端１ビットへ(VRAM3)
+;*NON*;
+;*NON*;	LODSB			; ドットの値をＡＬへ取り出す
+;*NON*;	SHR	AL,1		;	ＡＬの右端１ビットをキャリーへ
+;*NON*;	RCL	DL,1		; キャリーをＤＬの右端１ビットへ(VRAM0)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	DH,1		; キャリーをＤＨの右端１ビットへ(VRAM1)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	BL,1		; キャリーをＢＬの右端１ビットへ(VRAM2)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	BH,1		; キャリーをＢＨの右端１ビットへ(VRAM3)
+;*NON*;
+;*NON*;	LODSB			; ドットの値をＡＬへ取り出す
+;*NON*;	SHR	AL,1		;	ＡＬの右端１ビットをキャリーへ
+;*NON*;	RCL	DL,1		; キャリーをＤＬの右端１ビットへ(VRAM0)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	DH,1		; キャリーをＤＨの右端１ビットへ(VRAM1)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	BL,1		; キャリーをＢＬの右端１ビットへ(VRAM2)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	BH,1		; キャリーをＢＨの右端１ビットへ(VRAM3)
+;*NON*;
+;*NON*;	LODSB			; ドットの値をＡＬへ取り出す
+;*NON*;	SHR	AL,1		;	ＡＬの右端１ビットをキャリーへ
+;*NON*;	RCL	DL,1		; キャリーをＤＬの右端１ビットへ(VRAM0)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	DH,1		; キャリーをＤＨの右端１ビットへ(VRAM1)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	BL,1		; キャリーをＢＬの右端１ビットへ(VRAM2)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	BH,1		; キャリーをＢＨの右端１ビットへ(VRAM3)
+;*NON*;
+;*NON*;	LODSB			; ドットの値をＡＬへ取り出す
+;*NON*;	SHR	AL,1		;	ＡＬの右端１ビットをキャリーへ
+;*NON*;	RCL	DL,1		; キャリーをＤＬの右端１ビットへ(VRAM0)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	DH,1		; キャリーをＤＨの右端１ビットへ(VRAM1)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	BL,1		; キャリーをＢＬの右端１ビットへ(VRAM2)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	BH,1		; キャリーをＢＨの右端１ビットへ(VRAM3)
+;*NON*;
+;*NON*;	LODSB			; ドットの値をＡＬへ取り出す
+;*NON*;	SHR	AL,1		;	ＡＬの右端１ビットをキャリーへ
+;*NON*;	RCL	DL,1		; キャリーをＤＬの右端１ビットへ(VRAM0)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	DH,1		; キャリーをＤＨの右端１ビットへ(VRAM1)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	BL,1		; キャリーをＢＬの右端１ビットへ(VRAM2)
+;*NON*;	SHR	AL,1		;
+;*NON*;	RCL	BH,1		; キャリーをＢＨの右端１ビットへ(VRAM3)
+;*NON*;
+;*NON*;	MOV	AX,VRAM_SEG_G3
+;*NON*;	MOV	ES,AX
+;*NON*;	MOV	ES:[DI],BH
+;*NON*;
+;*NON*;	MOV	AX,VRAM_SEG_G2
+;*NON*;	MOV	ES,AX
+;*NON*;	MOV	ES:[DI],BL
+;*NON*;
+;*NON*;	MOV	AX,VRAM_SEG_G1
+;*NON*;	MOV	ES,AX
+;*NON*;	MOV	ES:[DI],DH
+;*NON*;
+;*NON*;	MOV	AX,VRAM_SEG_G0
+;*NON*;	MOV	ES,AX
+;*NON*;	MOV	ES:[DI],DL
+;*NON*;
+;*NON*;	INC	DI		; vram
+;*NON*;	CMP	DI,CX		; Ｘエンド=CX
+;*NON*;	JNBE	CLRCHG_NEXT2	; if DI > CX then NEXT2
+;*NON*;	JMP	CLRCHG_LOOP2	;
+;*NON*;CLRCHG_NEXT2:			;
+;*NON*;	POP	DX
+;*NON*;
+;*NON*;	ADD	CX,80		; Ｘエンド=CX
+;*NON*;	ADD	DX,80		;
+;*NON*;	MOV	SI,DX		; VRAM address pointer.=SI=DX
+;*NON*;
+;*NON*;	CMP	DX,BP		; Ｙエンド=BP
+;*NON*;	JNBE	CLRCHG_END	;
+;*NON*;	JMP	CLRCHG_LOOP_START
+;*NON*;CLRCHG_END:
+;*NON*;
+;*NON*;	POP	SI
+;*NON*;	POP	DS
+;*NON*;	POP	DI
+;*NON*;	POP	ES
+;*NON*;	POP	BP
+;*NON*;	POP	DX
+;*NON*;	POP	CX
+;*NON*;	POP	BX
+;*NON*;	POP	AX
+;*NON*;	RET
+;*NON*;CLRCHG	ENDP
+;*NON*;
+;*NON*;
+;*NON*;
+;*NON*;;	１ラインカラーチェンジ
+;*NON*;;	-I-   CX     : Ｘエンド
+;*NON*;;	      SI     : VRAM address pointer.
+;*NON*;;	      ES:[DI][640]:カラーを替えるパレット
+;*NON*;;	      ES:[DI][641]:変更後のパレット
+;*NON*;;	-I/O- ES:[DI]: ｴﾌｪｸﾄﾊﾞｯﾌｧオフセット
+;*NON*;
+;*NON*;CHANGE_COLOR	PROC	NEAR
+;*NON*;	PUSH	CX
+;*NON*;	SUB	CX,SI		; VRAM address pointer.=SI
+;*NON*;	INC	CX
+;*NON*;	SHL	CX,1		;
+;*NON*;	SHL	CX,1		;
+;*NON*;	SHL	CX,1		; * 8
+;*NON*;	MOV	BX,DI		;
+;*NON*;CHANGE_COLOR1:
+;*NON*;	MOV	AL,ES:[BX][640]
+;*NON*;	CMP	BYTE PTR ES:[DI],AL
+;*NON*;	JNE	CHANGE_COLOR2
+;*NON*;	MOV	AL,ES:[BX][641]
+;*NON*;	MOV	BYTE PTR ES:[DI],AL
+;*NON*;CHANGE_COLOR2:
+;*NON*;	INC	DI
+;*NON*;	LOOP	CHANGE_COLOR1
+;*NON*;	POP	CX
+;*NON*;	RET
+;*NON*;CHANGE_COLOR	ENDP
+;*NON*;
+;*NON*;
+
+CODE	ENDS
+
+
+DATA	SEGMENT	PUBLIC	'DATA'
+
+EXTRN	SSEFCT:WORD		; visual data segment plean.
+EXTRN	SSEFC0:WORD		; visual data segment plean 0
+EXTRN	SSEFC1:WORD		; visual data segment plean 1
+EXTRN	SSEFC2:WORD		; visual data segment plean 2
+EXTRN	SSEFC3:WORD		; visual data segment plean 3
+
+EXTRN	VX1:WORD		; source point x1.
+EXTRN	VY1:WORD		; source point y1.
+EXTRN	VX2:WORD		; length x2.
+EXTRN	VY2:WORD		; length y2.
+
+PUBLIC	CLRSOU			; 変更カラーパレット
+PUBLIC	CLRDES			; 変更後カラーパレット
+
+CLRSOU	DW	0		; 変更カラーパレット
+CLRDES	DW	0		; 変更後カラーパレット
+
+DATA	ENDS
+
+;*NON*;
+;*NON*;;	エフェクト用バッファ
+;*NON*;
+;*NON*;EFECT0	SEGMENT	PUBLIC	'EFECT0'
+;*NON*;	EXTRN	ECTOP0:BYTE
+;*NON*;EFECT0	ENDS
+;*NON*;
+;*NON*;
+
+	END
+;
+;	end of "EFECT2.ASM"
+;
+
