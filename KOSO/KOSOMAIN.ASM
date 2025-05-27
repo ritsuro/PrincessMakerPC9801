@@ -249,10 +249,10 @@ IKKAGETU	ENDP
 ; ****************************************************
 
 KAKUSHI_COMMAND	PROC	NEAR
-	CMP	KYTBLS[14],00000100B	; key code「N」
-	JNE	KAKUSHI_COMMAND_NORMAL	;
-	CMP	KYTBLS[8], 00000010B	; key code「O」
-	JNE	KAKUSHI_COMMAND_NORMAL	;
+;voidvoidvoid
+;voidvoidvoid
+;voidvoidvoid
+;voidvoidvoid
 	CMP	KYTBLS[3], 00000010B	; key code「R」
 	JNE	KAKUSHI_COMMAND_NORMAL	;
 	CMP	KYTBLS[7], 00000010B	; key code「I」
