@@ -1,0 +1,43 @@
+PRAS	=	KASM
+AS	=	MASM
+ASFLAGS	=	
+CPY	=	COPY
+RAMDISK	=	E:\
+
+..\EXEC\MOUSE.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\MUSCOR.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\MUSCR2.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\KEYBORD.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\KYLC.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\IOPORT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\BIOSPORT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\PPPP01.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\PROTECT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+
