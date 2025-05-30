@@ -1,0 +1,130 @@
+AS	=	MASM
+ASFLAGS	=	
+CPY	=	COPY
+RAMDISK	=	E:\
+
+..\EXEC\WIDALLOC.OBJ	:	$*.ASM ..\KOSO\WINDOW.INC
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDALLC2.OBJ	:	$*.ASM ..\KOSO\WINDOW.INC
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_KAIMON.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_SCHED.OBJ	:	$*.ASM WORDID.INC
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_KENSAK.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_KEISAN.OBJ	:	$*.ASM ..\KOSO\WINDOW.INC
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_SERIFU.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_BUGEI.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_GAKUMO.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_MUSYA.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_REIHOU.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_ARBEIT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_KYUSOK.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_BACANS.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_PROG.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_SENTOU.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_SOUBI.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_SYUKAK.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_BUTOH.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_CONTST.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_OHSAMA.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_UWASA.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_SEICHO.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_ENDING.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_KAIWA.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_MESSAG.OBJ	:	$*.ASM R_MESADD.INC
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_MESS02.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_MESS03.OBJ	:	$*.ASM R_MESAD3.INC
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_LOADS.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_SCHED2.OBJ	:	$*.ASM WORDID.INC
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\R_MAPWID.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+
