@@ -1,0 +1,23 @@
+PRAS	=	KASM
+AS	=	MASM
+ASFLAGS	=	
+CPY	=	COPY
+RAMDISK	=	E:\
+
+..\EXEC\PMD.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\PMDDSK.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\DMUSIC.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\DKYOKU.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+
