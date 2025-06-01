@@ -130,7 +130,7 @@ WIDTK_CHAR_OF	DW	0		; 敵キャラクタアドレス
 WIDCHAR_NUMBER_MUSUME	DW	0	; 自分の娘のキャラ番号（＝Ｎｏ．０）
 
 WIDCHAR_DRESS	DW	0		; 自分の娘の着ている服
-					; 0=何も着ない,1=春服,2=夏服,3=秋,4=冬
+					; 0=＊＊＊＊＊,1=春服,2=夏服,3=秋,4=冬
 
 
 WID_BUTOH_MAX	DW	24				; 武闘会キャラ数
