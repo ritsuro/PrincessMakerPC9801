@@ -1,0 +1,122 @@
+AS	=	MASM
+ASFLAGS	=	
+CPY	=	COPY
+RAMDISK	=	E:\
+
+..\EXEC\WIDMNG.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDMIT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDBAR.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDHED.OBJ	:	$*.ASM	..\KOSO\WINDOW.INC
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDGRP.OBJ	:	$*.ASM	..\KOSO\WINDOW.INC
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDVAL.OBJ	:	$*.ASM	..\KOSO\WINDOW.INC
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDITM.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDTXT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDKAZ.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDBTN.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDSLCT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDCLEN.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDGIRL.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDBG.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDSTAT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDBACK.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDFREAM.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDMTRX.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDEVNT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDFACE.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDFUKI.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDPROP.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDTBL.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDNAME.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDMINI.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDTOUR.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDDISK.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDBLOOD.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\WIDBORTH.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+
