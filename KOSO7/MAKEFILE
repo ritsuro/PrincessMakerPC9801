@@ -1,0 +1,23 @@
+PRAS	=	KASM
+AS	=	MASM
+ASFLAGS	=	
+CPY	=	COPY
+RAMDISK	=	E:\
+
+..\EXEC\OPENING.OBJ	:	$*.ASM ..\KOSO6\KYOKU.INC
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\ENDING.OBJ	:	$*.ASM ..\KOSO6\KYOKU.INC
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\STFROLL.OBJ	:	$*.ASM ..\KOSO6\KYOKU.INC
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+..\EXEC\DATAROLL.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+	$(CPY) $@ $(RAMDISK)
+
+
