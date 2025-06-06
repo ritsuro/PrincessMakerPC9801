@@ -1,0 +1,13 @@
+AS	=	OPTASM
+ASFLAGS	=	/M
+
+TSTEMS.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+
+DRVEMS.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+
+MACLIB.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM,$@;
+
+

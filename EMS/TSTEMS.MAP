@@ -1,0 +1,41 @@
+
+ Start  Stop   Length Name                   Class
+ 00000H 00495H 00496H CODE                   CODE
+ 004A0H 0081FH 00380H DATA                   DATA
+ 00820H 00FEFH 007D0H STACK                  
+ 00FF0H 010BDH 000CEH EMMCOD                 EMMCOD
+ 010C0H 010D3H 00014H EMMDAT                 EMMDAT
+
+ Origin   Group
+
+  Address         Publics by Value
+
+ 0000:01F0       PRNAH
+ 0000:022B       PRINT
+ 0000:0243       DECSTR
+ 0000:027B       INPUT
+ 0000:029C       STRDEC
+ 0000:02D7       HEXSTR
+ 0000:0319       STRHEX
+ 0000:0347       BINSTR
+ 0000:0373       STRBIN
+ 0000:0391       STRCMP
+ 0000:03A3       CLS
+ 0000:03B6       CSLON
+ 0000:03BD       CSLOFF
+ 0000:03C4       INPCHR
+ 0000:03CF       CHPUT
+ 0000:03D6       KESCAP
+ 0000:0419       KEYLOD
+ 0000:041A       PRNAB
+ 0000:042E       LOCATE
+ 0000:042F       LFPRN
+ 0000:0438       D10STR
+ 0000:047E       STRZTS
+ 00FF:0000       EMMCHK
+ 00FF:0028       EMM_G_S
+ 00FF:003A       EMM_G_P_FA
+ 00FF:0050       EMM_G_U_PC
+ 00FF:006A       EMM_A_P
+ 00FF:0092       EMM_MU_H_P
+ 00FF:00AA       EMM_D_P
