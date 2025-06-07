@@ -3,7 +3,7 @@
 ;	text vram put routine.
 ;
 ;	PC-9801UV11 make by R.H 1988
-;
+;│@│@
 ;		VTXPAC  ╬ьл 1с╪ч ╨чдф call ╪о╫ицч ╦айъ╦ ╕ ╩╬ц ╦юч╩╡║
 ;		VTXEND  ╬ьл и ╣эь ф   call ╪о╫ицч ╦айъ╦ ╕ дрц ╦юч╩╡║
 ;
