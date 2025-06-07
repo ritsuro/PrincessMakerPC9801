@@ -3,9 +3,9 @@
 ;	text vram put routine.
 ;
 ;	PC-9801UV11 make by R.H 1988
-;�@�@
-;		VTXPAC  ��� 1Ӽ� ���� call �Ͻ��� ���߸ � ��� ��޻��
-;		VTXEND  ��� � ��� �   call �Ͻ��� ���߸ � ��� ��޻��
+;
+;		VTXPAC  ｾﾘﾌ 1ﾓｼﾞ ｺﾞﾄﾆ call ｼﾏｽﾉﾃﾞ ｸﾁﾊﾟｸ ｦ ｻｾﾃ ｸﾀﾞｻｲ｡
+;		VTXEND  ｾﾘﾌ ﾉ ｵﾜﾘ ﾆ   call ｼﾏｽﾉﾃﾞ ｸﾁﾊﾟｸ ｦ ﾄﾒﾃ ｸﾀﾞｻｲ｡
 ;
 ;
 ;
@@ -48,11 +48,11 @@ PUBLIC	VTXPFC		; vram text print fuchi.
 PUBLIC	VTXSIZ		; character size set.
 PUBLIC	VTXCOL		; character color set.
 
-EXTRN	VTXPAC:NEAR	; ��� 1Ӽ� ���� call �Ͻ��� ���߸ � ��� ��޻��
-EXTRN	VTXEND:NEAR	; ��� � ��� �   call �Ͻ��� ���߸ � ��� ��޻��
+EXTRN	VTXPAC:NEAR	; ｾﾘﾌ 1ﾓｼﾞ ｺﾞﾄﾆ call ｼﾏｽﾉﾃﾞ ｸﾁﾊﾟｸ ｦ ｻｾﾃ ｸﾀﾞｻｲ｡
+EXTRN	VTXEND:NEAR	; ｾﾘﾌ ﾉ ｵﾜﾘ ﾆ   call ｼﾏｽﾉﾃﾞ ｸﾁﾊﾟｸ ｦ ﾄﾒﾃ ｸﾀﾞｻｲ｡
 
-;*;VTXPAC:RET	; ��� 1Ӽ� ���� call �Ͻ��� ���߸ � ��� ��޻��
-;*;VTXEND:RET	; ��� � ��� �   call �Ͻ��� ���߸ � ��� ��޻��
+;*;VTXPAC:RET	; ｾﾘﾌ 1ﾓｼﾞ ｺﾞﾄﾆ call ｼﾏｽﾉﾃﾞ ｸﾁﾊﾟｸ ｦ ｻｾﾃ ｸﾀﾞｻｲ｡
+;*;VTXEND:RET	; ｾﾘﾌ ﾉ ｵﾜﾘ ﾆ   call ｼﾏｽﾉﾃﾞ ｸﾁﾊﾟｸ ｦ ﾄﾒﾃ ｸﾀﾞｻｲ｡
 
 
 ; vram text print.
@@ -134,7 +134,7 @@ VTXPRA2:
 	MOV	VTXJCD,AX	; talk jis code.
 	CALL	SHFJIS		; shift jis -> jis code.
 VTXPRA3:
-	CALL	VTXPACX		; ���߸ put call.(public routine)
+	CALL	VTXPACX		; ｸﾁﾊﾟｸ put call.(public routine)
 
 	CALL	SIZFNT		; get size.
 	CALL	GETFNT		; get font.
@@ -193,13 +193,13 @@ VTXPRA_NEXT:
 	JMP	VTXPRA0		;
 
 VTXPRA9:
-	CALL	VTXENDX		; ���߸ ��� call.(public routine)
+	CALL	VTXENDX		; ｸﾁﾊﾟｸ ｵﾜﾘ call.(public routine)
 	RET
 	
 VTXPRA	ENDP
 
 
-;	���߸ put call.(public routine)
+;	ｸﾁﾊﾟｸ put call.(public routine)
 
 VTXPACX	PROC	NEAR
 	PUSH	AX
@@ -211,7 +211,7 @@ VTXPACX	PROC	NEAR
 	PUSH	BP
 	PUSH	ES
 	PUSH	DS
-	CALL	VTXPAC		; ���߸ put call.(public routine)
+	CALL	VTXPAC		; ｸﾁﾊﾟｸ put call.(public routine)
 	POP	DS
 	POP	ES
 	POP	BP
@@ -225,7 +225,7 @@ VTXPACX	PROC	NEAR
 VTXPACX	ENDP
 
 
-;	���߸ ��� call.(public routine)
+;	ｸﾁﾊﾟｸ ｵﾜﾘ call.(public routine)
 
 VTXENDX	PROC	NEAR
 	PUSH	AX
@@ -237,7 +237,7 @@ VTXENDX	PROC	NEAR
 	PUSH	BP
 	PUSH	ES
 	PUSH	DS
-	CALL	VTXEND		; ���߸ ��� call.(public routine)
+	CALL	VTXEND		; ｸﾁﾊﾟｸ ｵﾜﾘ call.(public routine)
 	POP	DS
 	POP	ES
 	POP	BP
@@ -989,7 +989,7 @@ PTRPTN3:
 
 	RET
 
-;	AND set.(��Ƿ)
+;	AND set.(ｸﾛﾇｷ)
 
 PTRPTNSET:
 	MOV	SI,OFFSET PUTFNT	; vram put buffer.
@@ -1032,7 +1032,7 @@ PTRPTNOR3:				;
 	LOOP	PTRPTNOR2		;
 	RET
 
-;	AND set.(��Ƿ) harf character.
+;	AND set.(ｸﾛﾇｷ) harf character.
 
 PTRPTNH:
 	MOV	SI,OFFSET PUTFNT	; vram put buffer.
@@ -1140,7 +1140,7 @@ GETFNT	PROC	NEAR
 
 	CALL	KCGRED		; KCG font get.
 
-	CMP	DX,212AH	; �I(8149h)
+	CMP	DX,212AH	; ！(8149h)
 	JNE	GETFNT_EXIT	;
 	CALL	FNTSFT16L	; width 16dot font left shift.
 GETFNT_EXIT:
@@ -1186,7 +1186,7 @@ KCGRED	PROC	NEAR
 	PUSH	CX
 	PUSH	BX
 
-	MOV	AL,0BH	; �ޯ� ϯ�� γ�� SET
+	MOV	AL,0BH	; ﾋﾞｯﾄ ﾏｯﾌﾟ ﾎｳｼｷ SET
 	OUTGDC	68H,AL	;
 ;*;	CALL	KCGRED_WAIT
 
@@ -1270,7 +1270,7 @@ KCGRED222:
 
 
 KCGRED_EXIT:
-	MOV	AL,0AH	; ���ޱ��� γ�� SET
+	MOV	AL,0AH	; ｺｰﾄﾞｱｸｾｽ ﾎｳｼｷ SET
 	OUTGDC	68H,AL	;
 
 	POP	BX
@@ -1292,9 +1292,9 @@ KCGRED	ENDP
 ;*;	RET
 ;*;KCGRED_WAIT	ENDP
 
-;;;;	MOV	AL,0BH	; �ޯ� ϯ�� γ�� SET
+;;;;	MOV	AL,0BH	; ﾋﾞｯﾄ ﾏｯﾌﾟ ﾎｳｼｷ SET
 ;;;;	OUTGDC	68H,AL	;
-;;;;	MOV	AL,0AH	; ���ޱ��� γ�� SET
+;;;;	MOV	AL,0AH	; ｺｰﾄﾞｱｸｾｽ ﾎｳｼｷ SET
 ;;;;	OUTGDC	68H,AL	;
 ;;;;	CALL	VECSET_VSYNC_SAVE	; CRTV int vector save.
 ;;;;	CALL	VECSET_VSYNC_LOAD	; CRTV int vector load.
