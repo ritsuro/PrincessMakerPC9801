@@ -1,0 +1,154 @@
+AS	=	MASM
+ASFLAGS	=
+
+ADVPLS.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+ADVPLT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+ADVMOV.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+ADVTBL.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+ARAPIC.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+ALLPLS.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+AANIME.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+BINSET.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+CNZS88.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+CHIPGET.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+CONSOLE.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+DATPL2.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+DATPL3A.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+DATPLS.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+DISKIO.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+DSKBET.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+DSKPLT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+DSPSET.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+EFECT2.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+GRBIO.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+MACLIB.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+MOUSE.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+MSKDAT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+MUSCOR.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+MUSDAT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+PARTST.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+PARTT2.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+PARTT3.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+PLSLD.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+PLSLD2.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+PLSLD3.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+PLSLD4.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+PLTSET.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+PLTTBL.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+PLTPAT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+PTDEV.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+TOUCH.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+ZL.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+TUCDAT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+TXTATR.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+TXTLCK.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+TXTLCK2.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+VRMCH2.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+VRMCHG.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+VRMEDT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+VRMMOV.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+VRTEXT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+MINTXT.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+TIMER.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+PPPP01.OBJ	:	$*.ASM
+	$(AS) $(ASFLAGS) $*.ASM;
+
+
