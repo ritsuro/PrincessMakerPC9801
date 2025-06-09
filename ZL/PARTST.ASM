@@ -258,7 +258,7 @@ PATGTC	PROC	NEAR
 	MOV	AX,BCOUNT			; データ長さ
 	MOV	ES:[DI][PARTS_OFST_LEN],AX	; データ長さ
 
-	MOV	AX,BCOUNT		; データ長さ
+	MOV	AX,BCOUNT		; データ長さ	（作者から）次の行 ADD PRSSIZ はバグのように見える、当時のエディタの画面外。他処理への影響無し.
 	ADD	AX,PARTS_OFST_DAT	; データ開始オフセット				ADD	PRSSIZ,AX	; パーツバッファの使用サイズ
 
 	;	属性(0=データ終わり,1=無圧縮データ,2=圧縮データ)
