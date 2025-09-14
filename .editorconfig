@@ -1,0 +1,12 @@
+# EditorConfig is awesome: https://editorconfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*.{ASM,INC}]
+indent_style = tab
+indent_size = 8
+
+[*.TXT]
+indent_style = tab
+indent_size = 4
